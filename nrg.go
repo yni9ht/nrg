@@ -11,7 +11,7 @@ type Nrg struct {
 	handles map[string]HandlerFunc
 }
 
-func (n *Nrg) Get(path string, handle HandlerFunc) *Nrg {
+func (n *Nrg) GET(path string, handle HandlerFunc) *Nrg {
 	return n.addRoute(http.MethodGet, path, handle)
 }
 

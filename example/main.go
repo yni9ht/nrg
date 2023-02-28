@@ -9,7 +9,11 @@ import (
 func main() {
 	server := nrg.NewServer()
 
-	server.Get("/ping", func(context *nrg.Context) {
+	server.GET("/ping", func(context *nrg.Context) {
+		if id, ok := context.GetQuery("id"); ok {
+			context.JSON(http.StatusOK, id)
+			return
+		}
 		context.JSON(http.StatusOK, "pong")
 	})
 
@@ -17,7 +21,7 @@ func main() {
 		context.JSON(http.StatusOK, "post")
 	})
 
-	if err := server.Run(":8181"); err != nil {
+	if err := server.Run(); err != nil {
 		log.Fatalln(err)
 	}
 }
