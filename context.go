@@ -35,6 +35,8 @@ func (c *Context) getQueryArray(key string) ([]string, bool) {
 }
 
 func (c *Context) JSON(code int, obj interface{}) {
+	header := c.W.Header()
+	header.Set("Content-Type", "application/json")
 	c.W.WriteHeader(code)
 
 	jsonBytes, err := json.Marshal(obj)
